@@ -1,0 +1,2 @@
+﻿Interfaces used, due to mocking and inheritance.
+Could've used classes and make them all static.

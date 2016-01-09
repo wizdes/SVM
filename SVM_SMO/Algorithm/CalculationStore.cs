@@ -1,6 +1,6 @@
 ﻿namespace SVM_SMO.Algorithm
 {
-    class CalculationStore
+    internal class CalculationStore
     {
     }
 }

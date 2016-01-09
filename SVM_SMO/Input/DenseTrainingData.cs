@@ -1,6 +1,6 @@
 ﻿namespace SVM_SMO.Input
 {
-    class DenseTrainingData : ITrainingData
+    public class DenseTrainingData : ITrainingData
     {
     }
 }

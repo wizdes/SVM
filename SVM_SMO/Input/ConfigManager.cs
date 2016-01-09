@@ -1,7 +1,6 @@
-﻿
-namespace SVM_SMO.Input
+﻿namespace SVM_SMO.Input
 {
-    class ConfigManager
+    public class ConfigManager
     {
     }
 }
