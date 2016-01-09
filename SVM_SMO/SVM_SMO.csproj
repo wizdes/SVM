@@ -43,8 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithm\CalculationStore.cs" />
+    <Compile Include="Algorithm\DotProductKernel.cs" />
+    <Compile Include="Interface\IKernel.cs" />
+    <Compile Include="Input\ConfigManager.cs" />
+    <Compile Include="Input\DenseTrainingData.cs" />
+    <Compile Include="Interface\ITrainingData.cs" />
+    <Compile Include="Interface\ISVMAlgorithm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Algorithm\SMOSVMAlgorithm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
