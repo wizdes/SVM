@@ -7,6 +7,9 @@ namespace SVM_SMO
     {
         static void Main(string[] args)
         {
+            // read the arguments and stick them into the config manager
+
+            // 
         }
     }
 }
