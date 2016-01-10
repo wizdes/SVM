@@ -9,7 +9,7 @@ namespace SVM_SMO
         {
             // read the arguments and stick them into the config manager
             ConfigManager.Instance.ParseArguments(args);
-
+  
             // next need to get the file name and read the elements into dense training data
             ITrainingData trainingData = new DenseTrainingData();
 

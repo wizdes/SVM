@@ -53,6 +53,12 @@
     <Compile Include="BasicInputTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SVM_SMO\SVM_SMO.csproj">
+      <Project>{a033fd65-ab5a-404e-b1d2-9b4e4d101f91}</Project>
+      <Name>SVM_SMO</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

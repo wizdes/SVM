@@ -32,7 +32,7 @@
 
         public double epsilon;
 
-        public string trainingDataFilename;
+        internal string trainingDataFilename;
 
         public void ParseArguments(string[] args)
         {
@@ -42,7 +42,7 @@
             }
 
             // parse string args
-            for(int i = 0; i < args.Length; i++)
+            for(int i = 0; i < args.Length; i = i + 2)
             {
                 string option = args[i];
                 string arg = args[i + 1];

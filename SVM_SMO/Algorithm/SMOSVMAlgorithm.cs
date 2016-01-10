@@ -1,7 +1,6 @@
 ﻿namespace SVM_SMO.Algorithm
 {
     using System;
-    using SVM_SMO;
 
     public class SMOSVMAlgorithm : ISVMAlgorithm
     {
