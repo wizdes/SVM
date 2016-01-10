@@ -1,6 +1,7 @@
 ﻿namespace SVM_SMO
 {
-    interface IKernel
+    public interface IKernel
     {
+
     }
 }

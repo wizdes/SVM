@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Algorithm\CalculationStore.cs" />
     <Compile Include="Algorithm\DotProductKernel.cs" />
+    <Compile Include="Algorithm\ResultData.cs" />
     <Compile Include="Interface\IKernel.cs" />
     <Compile Include="Input\ConfigManager.cs" />
     <Compile Include="Input\DenseTrainingData.cs" />

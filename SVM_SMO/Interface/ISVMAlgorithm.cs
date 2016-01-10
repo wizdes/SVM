@@ -1,6 +1,9 @@
 ﻿namespace SVM_SMO
 {
-    interface ISVMAlgorithm
+    using SVM_SMO.Algorithm;
+
+    public interface ISVMAlgorithm
     {
+        ResultData run();
     }
 }

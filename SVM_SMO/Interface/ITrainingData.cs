@@ -1,6 +1,6 @@
 ﻿namespace SVM_SMO
 {
-    interface ITrainingData
+    public interface ITrainingData
     {
     }
 }
