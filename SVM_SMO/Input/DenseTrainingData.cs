@@ -9,7 +9,16 @@
         private int[] result;
 
         private IFileManager fileManager;
-        
+
+        public int Length
+        {
+            get
+            {
+                if (result == null) return 0;
+                return result.Length;
+            }
+        }
+
         public DenseTrainingData(IFileManager providedFileManager = null)
         {
             // read line by line
