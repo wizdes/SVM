@@ -5,9 +5,9 @@
     using System.Collections.Generic;
     public class SMOSVMAlgorithm : ISVMAlgorithm
     {
-        private IKernel kernel;
-        private ITrainingData trainingData;
-        private CalculationStore calculationStore;
+        internal IKernel kernel;
+        internal ITrainingData trainingData;
+        internal CalculationStore calculationStore;
 
         public delegate int MethodDelegate(int i);
 
@@ -18,7 +18,7 @@
             this.calculationStore = new CalculationStore(this.trainingData);
         }
 
-        public ResultData run()
+        public CalculationStore run()
         {
             // the SMO algorithm a loop; the exit conditions are:
             // if all the training elements are examined and don't affect the weights
@@ -40,8 +40,14 @@
                 else if (!hasChanged) scanAllData = true;
             }
 
-            return new ResultData(this.calculationStore);
+            return this.calculationStore;
         }
+
+        internal double calculateError(int index1)
+        {
+            throw new NotImplementedException();
+        }
+
         private bool examineAndStep(int firstIndex, bool prevAlphaCalculationRequired)
         {
             if (prevAlphaCalculationRequired)
@@ -67,7 +73,7 @@
                     {
                         if (f(firstIndex, i))
                         {
-                            if (SMOStep(firstIndex, i)) return true;
+                            if (SMOStep.Instance(this).run(firstIndex, i)) return true;
                         }
                     }
                 }
@@ -76,9 +82,8 @@
             return false;
         }
 
-        private bool SMOStep(int firstIndex, int secondIndex)
+        private void GetGammaLH(double s, ref double gamma, ref double l, ref double h)
         {
-            // let's finish the SMO Step architecture today
             throw new NotImplementedException();
         }
 

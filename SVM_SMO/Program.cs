@@ -22,13 +22,13 @@ namespace SVM_SMO
             ISVMAlgorithm svm = new SMOSVMAlgorithm(trainingData, kernel);
 
             // SVM algorithm run
-            ResultData data = svm.run();
+            CalculationStore data = svm.run();
 
             // print the weight vectors and 'b' constants
-            data.Print();
+            CalculationStore.Print();
 
             // record the results of the SVM run
-            data.RecordResults();
+            CalculationStore.RecordResults();
         }
     }
 }

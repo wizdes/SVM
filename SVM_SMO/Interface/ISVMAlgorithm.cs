@@ -4,6 +4,6 @@
 
     public interface ISVMAlgorithm
     {
-        ResultData run();
+        CalculationStore run();
     }
 }

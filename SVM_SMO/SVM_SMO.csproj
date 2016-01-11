@@ -46,6 +46,7 @@
     <Compile Include="Algorithm\CalculationStore.cs" />
     <Compile Include="Algorithm\DotProductKernel.cs" />
     <Compile Include="Algorithm\ResultData.cs" />
+    <Compile Include="Algorithm\SMOStep.cs" />
     <Compile Include="Input\FileManager.cs" />
     <Compile Include="Interface\IFileManager.cs" />
     <Compile Include="Interface\IKernel.cs" />
