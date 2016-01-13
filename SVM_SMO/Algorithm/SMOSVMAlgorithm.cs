@@ -45,7 +45,17 @@
 
         internal double calculateError(int index1)
         {
-            throw new NotImplementedException();
+            double calculatedResult = 0;
+
+            for (int i = 0; i < this.calculationStore.Weights.Length; i++)
+            {
+                calculatedResult +=
+                    this.calculationStore.Weights[i] * this.trainingData.GetTrainingData(index1, i);
+
+            }
+
+            calculatedResult -= this.calculationStore.B[0];
+            return calculatedResult;
         }
 
         private bool examineAndStep(int firstIndex, bool prevAlphaCalculationRequired)
@@ -69,7 +79,7 @@
 
                 foreach (Func<int, int, bool> f in secondIndexSearchForAlpha)
                 {
-                    for (int i = 0; i < 0; i++)
+                    for (int i = 0; i < this.calculationStore.Alphas.Length; i++)
                     {
                         if (f(firstIndex, i))
                         {
@@ -82,11 +92,6 @@
             return false;
         }
 
-        private void GetGammaLH(double s, ref double gamma, ref double l, ref double h)
-        {
-            throw new NotImplementedException();
-        }
-
         // Helper functions to stay here
 
         // Helper functions that can be moved to another class (just add calcStore)
@@ -96,14 +101,39 @@
                 || this.calculationStore.Alphas[i] == ConfigManager.Instance.C);
         }
 
+        public double abs(double x)
+        {
+            return x > 0 ? x : -x;
+        }
+
         private bool GetIndexOfHighestError(int arg1, int arg2)
         {
-            throw new NotImplementedException();
+            double maxError = 0;
+            double maxErrorIndex = -1;
+            for(int i = 0; i < this.calculationStore.Alphas.Length; i++)
+            {
+                double errorDiff = abs(calculateError(i) - calculateError(arg1));
+                if (errorDiff > maxError)
+                {
+                    maxError = errorDiff;
+                    maxErrorIndex = i;
+                }
+            }
+
+            if (maxErrorIndex == -1) return false;
+            return true;
         }
 
         private bool GetIndexWithAlpha(int arg1, int arg2)
         {
-            throw new NotImplementedException();
+            int index2 = arg1 + arg2 % this.calculationStore.Alphas.Length;
+            double ind2Alpha = this.calculationStore.Alphas[index2];
+            if(ind2Alpha > 0 && ind2Alpha < ConfigManager.Instance.C)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private bool GetIndex(int arg1, int arg2)
@@ -119,7 +149,8 @@
 
         private double RValue(int i)
         {
-            throw new NotImplementedException();
+            double e = calculateError(i);
+            return this.trainingData.GetTrainingResult(i) * (e - this.trainingData.GetTrainingResult(i));
         }
     }
 }

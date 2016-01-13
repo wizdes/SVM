@@ -1,12 +1,8 @@
-﻿using SVM_SMO.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SVM_SMO.Algorithm
+﻿namespace SVM_SMO.Algorithm
 {
+    using SVM_SMO.Input;
+    using System;
+
     internal class SMOStep
     {
         public double E_1;
@@ -74,22 +70,53 @@ namespace SVM_SMO.Algorithm
 
             if (L.Equals(H)) return false;
 
-            double new_alpha_2 = CalculateNewAlpha_2(k11, k12, k22, eta);
+            double new_alpha_2 = CalculateNewAlpha_2(k11, k12, k22, eta, E_1, E_2, y_1, y_2, alpha_2);
 
-            double alpha_difference = fabs(new_alpha_2 - alpha_2);
+            double alpha_difference = this.alg.abs(new_alpha_2 - alpha_2);
 
-            if (fabs(new_alpha_2 - alpha_2) < epsilon * (new_alpha_2 + alpha_2 + epsilon)) return false;
+            if (this.alg.abs(new_alpha_2 - alpha_2) < epsilon * (new_alpha_2 + alpha_2 + epsilon)) return false;
 
             // here, a1 is calculated.
             double new_alpha_1 = alpha_1 - s * (new_alpha_2 - alpha_2);
             HandleAlpha1OutsideZeroC(ref new_alpha_2, ref new_alpha_1);
 
             // do I need to calculate W/B here?
+            // yes, you do, for the error calculations.
 
             this.alg.calculationStore.Alphas[index1] = new_alpha_1;
             this.alg.calculationStore.Alphas[index2] = new_alpha_2;
 
             return true;
+        }
+
+        private double CalculateNewAlpha_2(double k11, double k12, double k22, double eta, double e_1, double e_2, double y_1, double y_2, double alpha_2)
+        {
+            double a2 = 0;
+            // a1 and a2 are calculated here
+            // depending on e2, e1, the eta and the previous alpha, a2 is determined to be either L or H.
+            if (eta < 0)
+            {
+                a2 = alpha_2 + y_2 * (E_2 - E_1) / eta;
+                if (a2 < L)
+                    a2 = L;
+                else if (a2 > H)
+                    a2 = H;
+            }
+            else {
+
+                // compute Lobj, Hobj; objective function at a2 = L, a2 = H
+                // I'm guessing this will make sense once I know what LObj and HObj are.
+                double c1 = eta / 2;
+                double c2 = y_2 * (E_1 - E_2) - eta * alpha_2;
+                double Lobj = c1 * L * L + c2 * L;
+                double Hobj = c1 * H * H + c2 * H;
+
+                if (Lobj > Hobj + epsilon) a2 = L;
+                else if (Lobj < Hobj - epsilon) a2 = H;
+                else a2 = alpha_2;
+            }
+
+            return a2;
         }
 
         private void HandleAlpha1OutsideZeroC(ref double new_alpha_2, ref double new_alpha_1)
@@ -104,16 +131,6 @@ namespace SVM_SMO.Algorithm
                 new_alpha_2 += s * (new_alpha_1 - C);
                 new_alpha_1 = C;
             }
-        }
-
-        private int fabs(double v)
-        {
-            throw new NotImplementedException();
-        }
-
-        private double CalculateNewAlpha_2(double k11, double k12, double k22, double eta)
-        {
-            throw new NotImplementedException();
         }
 
         private void GetGammaAndLowHighBounds(double s)
@@ -150,7 +167,27 @@ namespace SVM_SMO.Algorithm
 
         private void clearVariables()
         {
-            throw new NotImplementedException();
+            E_1 = 0;
+            E_2 = 0;
+
+            y_1 = 0;
+            y_2 = 0;
+
+            s = 0;
+
+            alpha_1 = 0;
+            alpha_2 = 0;
+
+            gamma = 0;
+            L = 0;
+            H = 0;
+            C = 0;
+            epsilon = 0;
+
+            k11 = 0;
+            k12 = 0;
+            k22 = 0;
+            eta = 0;
         }
     }
 }
