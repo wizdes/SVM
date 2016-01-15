@@ -83,6 +83,29 @@
             // do I need to calculate W/B here?
             // yes, you do, for the error calculations.
 
+            double bnew;
+
+            if (new_alpha_1 > 0 && new_alpha_1 < C)
+                bnew = this.alg.calculationStore.B[0] + E_1 + y_1 * (new_alpha_1 - alpha_1) * k11 + y_2 * (new_alpha_2 - alpha_2) * k12;
+            else {
+                if (new_alpha_2 > 0 && new_alpha_2 < C)
+                    bnew = this.alg.calculationStore.B[0] + E_2 + y_1 * (new_alpha_1 - alpha_1) * k12 + y_2 * (new_alpha_2 - alpha_2) * k22;
+                else {
+                    double b1 = this.alg.calculationStore.B[0] + E_1 + y_1 * (new_alpha_1 - alpha_1) * k11 + y_2 * (new_alpha_2 - alpha_2) * k12;
+                    double b2 = this.alg.calculationStore.B[0] + E_2 + y_1 * (new_alpha_1 - alpha_1) * k12 + y_2 * (new_alpha_2 - alpha_2) * k22;
+                    bnew = (b1 + b2) / 2;
+                }
+            }
+
+            this.alg.calculationStore.B[0] = bnew;
+
+            double t1 = y_1 * (new_alpha_1 - alpha_1);
+            double t2 = y_2 * (new_alpha_2 - alpha_2);
+
+
+            for (int i = 0; i < this.alg.calculationStore.Weights.Length; i++)
+                this.alg.calculationStore.Weights[i] += this.alg.trainingData.GetTrainingData(index1, i) * t1 + this.alg.trainingData.GetTrainingData(index2, i) * t2;
+
             this.alg.calculationStore.Alphas[index1] = new_alpha_1;
             this.alg.calculationStore.Alphas[index2] = new_alpha_2;
 

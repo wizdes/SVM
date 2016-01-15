@@ -92,8 +92,6 @@
             return false;
         }
 
-        // Helper functions to stay here
-
         // Helper functions that can be moved to another class (just add calcStore)
         private bool ContainsPreviousAlphaChanges(int i)
         {
