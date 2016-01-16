@@ -68,7 +68,7 @@
             int lineCounter = 0;
             while ((line = fileManager.ReadLine()) != null && !string.IsNullOrEmpty(line))
             {
-                double[] values = line.Split(' ').Select(x => Convert.ToDouble(x)).ToArray();
+                double[] values = line.Split().Select(x => Convert.ToDouble(x)).ToArray();
                 int i = 0;
                 for (i = 0; i < values.Length - 1; i++)
                 {

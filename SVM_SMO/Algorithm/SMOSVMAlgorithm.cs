@@ -31,8 +31,9 @@
                 bool changed = false;
                 for (int i = 0; i < trainingData.Length; i++)
                 {
-                    changed = examineAndStep(i, hasChanged) ? true : hasChanged;
+                    changed = examineAndStep(i, hasChanged) ? true : changed;
                 }
+
 
                 hasChanged = changed;
 
@@ -106,20 +107,24 @@
 
         private bool GetIndexOfHighestError(int arg1, int arg2)
         {
+            // I can cache the value here
             double maxError = 0;
             double maxErrorIndex = -1;
             for(int i = 0; i < this.calculationStore.Alphas.Length; i++)
             {
-                double errorDiff = abs(calculateError(i) - calculateError(arg1));
-                if (errorDiff > maxError)
+                if(this.calculationStore.Alphas[i] > 0 && this.calculationStore.Alphas[i] < ConfigManager.Instance.C)
                 {
-                    maxError = errorDiff;
-                    maxErrorIndex = i;
+                    double errorDiff = abs(calculateError(i) - calculateError(arg1));
+                    if (errorDiff > maxError)
+                    {
+                        maxError = errorDiff;
+                        maxErrorIndex = i;
+                    }
                 }
             }
 
             if (maxErrorIndex == -1) return false;
-            return true;
+            return maxErrorIndex == arg2;
         }
 
         private bool GetIndexWithAlpha(int arg1, int arg2)

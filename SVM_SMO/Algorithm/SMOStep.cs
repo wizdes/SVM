@@ -49,12 +49,18 @@
 
         public bool run(int index1, int index2)
         {
+            Console.WriteLine("takeStep(" + index1 + ", " + index2);
             clearVariables();
             InitializeVariables(index1, index2);
 
             GetGammaAndLowHighBounds(s);
 
             if (minBound.Equals(maxBound)) return false;
+
+            k11 = this.alg.kernel.calculate(this.alg.trainingData, index1, index1);
+            k12 = this.alg.kernel.calculate(this.alg.trainingData, index1, index2);
+            k22 = this.alg.kernel.calculate(this.alg.trainingData, index2, index2);
+            eta = 2 * k12 - k11 - k22;
 
             double new_alpha_2 = CalculateNewAlpha_2(k11, k12, k22, eta, E_1, E_2, y_1, y_2, alpha_2);
 
@@ -94,6 +100,8 @@
 
             this.alg.calculationStore.Alphas[index1] = new_alpha_1;
             this.alg.calculationStore.Alphas[index2] = new_alpha_2;
+
+            Console.WriteLine("Alphas: " + new_alpha_1 + ", " + new_alpha_2);
 
             // let's try this step, with the weight calculation from the book.
             //double temp = 0;

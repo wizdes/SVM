@@ -63,8 +63,12 @@
     <None Include="trivial.data">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="trivial2.data" />
-    <None Include="trivial3.data" />
+    <None Include="trivial2.data">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="trivial3.data">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="DesignChoices.txt" />

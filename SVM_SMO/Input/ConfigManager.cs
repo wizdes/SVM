@@ -8,7 +8,7 @@
 
         private ConfigManager()
         {
-            C = 0.05;
+            C = 100;
             tolerance = 0.0001;
             epsilon = 0.001;
         }
