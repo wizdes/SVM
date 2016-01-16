@@ -95,6 +95,7 @@
             this.alg.calculationStore.Alphas[index1] = new_alpha_1;
             this.alg.calculationStore.Alphas[index2] = new_alpha_2;
 
+            // let's try this step, with the weight calculation from the book.
             //double temp = 0;
             //int numAlpha = 0;
             //for (int j = 0; j < this.alg.trainingData.Length; j++)
