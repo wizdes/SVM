@@ -19,6 +19,15 @@
             }
         }
 
+        public int Dimension
+        {
+            get
+            {
+                if (trainingValues == null) return 0;
+                return trainingValues.GetLength(1);
+            }
+        }
+
         public DenseTrainingData(IFileManager providedFileManager = null)
         {
             // read line by line
@@ -73,7 +82,7 @@
 
         public double GetTrainingData(int line, int position)
         {
-            return trainingValues[line, position];
+              return trainingValues[line, position];
         }
 
         public double GetTrainingResult(int line)

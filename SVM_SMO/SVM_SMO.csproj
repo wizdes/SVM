@@ -60,6 +60,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="trivial.data">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="trivial2.data" />
+    <None Include="trivial3.data" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DesignChoices.txt" />

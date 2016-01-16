@@ -25,7 +25,7 @@ namespace SVM_SMO
             CalculationStore data = svm.run();
 
             // print the weight vectors and 'b' constants
-            CalculationStore.Print();
+            data.Print();
 
             // record the results of the SVM run
             CalculationStore.RecordResults();

@@ -28,8 +28,8 @@ namespace SVM_SMO.Algorithm
         {
             this.trainingData = trainingData;
             this.Alphas = new double[trainingData.Length];
-            this.Weights = new double[trainingData.Length];
-            this.B = new double[trainingData.Length];
+            this.Weights = new double[trainingData.Dimension];
+            this.B = new double[1];
         }
 
         public void CalculateWB()
@@ -37,14 +37,18 @@ namespace SVM_SMO.Algorithm
 
         }
 
-        internal static void Print()
+        internal void Print()
         {
-            throw new NotImplementedException();
+            for(int i = 0; i < this.Weights.Length; i++)
+            {
+                Console.WriteLine("w_" + i + ": " + this.Weights[i]);
+            }
+
+            Console.WriteLine("b: " + this.B[0]);
         }
 
         internal static void RecordResults()
         {
-            throw new NotImplementedException();
         }
     }
 }

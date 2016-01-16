@@ -55,7 +55,7 @@
             }
 
             calculatedResult -= this.calculationStore.B[0];
-            return calculatedResult;
+            return calculatedResult - this.trainingData.GetTrainingResult(index1);
         }
 
         private bool examineAndStep(int firstIndex, bool prevAlphaCalculationRequired)
@@ -81,7 +81,7 @@
                 {
                     for (int i = 0; i < this.calculationStore.Alphas.Length; i++)
                     {
-                        if (f(firstIndex, i))
+                        if (firstIndex != i && f(firstIndex, i))
                         {
                             if (SMOStep.Instance(this).run(firstIndex, i)) return true;
                         }
@@ -124,7 +124,7 @@
 
         private bool GetIndexWithAlpha(int arg1, int arg2)
         {
-            int index2 = arg1 + arg2 % this.calculationStore.Alphas.Length;
+            int index2 = (arg1 + arg2) % this.calculationStore.Alphas.Length;
             double ind2Alpha = this.calculationStore.Alphas[index2];
             if(ind2Alpha > 0 && ind2Alpha < ConfigManager.Instance.C)
             {
@@ -141,14 +141,17 @@
 
         private bool RValueViolatesKKT(int firstIndex)
         {
-            return (RValue(firstIndex) > ConfigManager.Instance.tolerance && this.calculationStore.Alphas[firstIndex] > 0)
-                            || (RValue(firstIndex) < -ConfigManager.Instance.tolerance && this.calculationStore.Alphas[firstIndex] < ConfigManager.Instance.C);
+            double i1RValue = RValue(firstIndex);
+            double tolerance = ConfigManager.Instance.tolerance;
+            double alpha1 = this.calculationStore.Alphas[firstIndex];
+            return (i1RValue > tolerance && alpha1 > 0) || (i1RValue < -tolerance && alpha1 < ConfigManager.Instance.C);
         }
 
         private double RValue(int i)
         {
-            double e = calculateError(i);
-            return this.trainingData.GetTrainingResult(i) * (e - this.trainingData.GetTrainingResult(i));
+            double error = calculateError(i);
+            double trainingResult = this.trainingData.GetTrainingResult(i);
+            return trainingResult * error;
         }
     }
 }
